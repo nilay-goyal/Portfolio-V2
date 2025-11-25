@@ -117,8 +117,8 @@ export default function ContactPage() {
                                     type="submit"
                                     disabled={isSubmitting}
                                     className={`w-full pixel-button text-sm font-bold text-white uppercase tracking-wider ${isSubmitting
-                                            ? "bg-[#808080] cursor-not-allowed"
-                                            : "bg-[#4a90e2] hover:bg-[#3880d0]"
+                                        ? "bg-[#808080] cursor-not-allowed"
+                                        : "bg-[#4a90e2] hover:bg-[#3880d0]"
                                         }`}
                                 >
                                     {isSubmitting ? "SENDING..." : "SEND MESSAGE"}
@@ -129,15 +129,21 @@ export default function ContactPage() {
                         {/* Quick Contact Info */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             {[
-                                { label: "EMAIL", value: "hello@nilay.dev", icon: "📧", color: "bg-[#e0f8cf] border-[#c0e0b0]" },
-                                { label: "LINKEDIN", value: "/in/nilaygoyal", icon: "💼", color: "bg-[#d0e8f8] border-[#b0d0e0]" },
-                                { label: "GITHUB", value: "@nilaygoyal", icon: "💻", color: "bg-[#f0d0e0] border-[#e0b0c0]" },
+                                { label: "EMAIL", value: "nilay800@gmail.com", href: "mailto:nilay800@gmail.com", icon: "📧", color: "bg-[#e0f8cf] border-[#c0e0b0]" },
+                                { label: "LINKEDIN", value: "nilay-goyal", href: "https://www.linkedin.com/in/nilay-goyal/", icon: "💼", color: "bg-[#d0e8f8] border-[#b0d0e0]" },
+                                { label: "GITHUB", value: "nilay-goyal", href: "https://github.com/nilay-goyal", icon: "💻", color: "bg-[#f0d0e0] border-[#e0b0c0]" },
                             ].map((item) => (
-                                <div key={item.label} className={`${item.color} border-2 p-3 text-center hover:brightness-95 cursor-pointer transition-all border-[#2d2d2d] shadow-[2px_2px_0_0_#2d2d2d]`}>
+                                <a
+                                    key={item.label}
+                                    href={item.href}
+                                    target={item.label === "EMAIL" ? "_self" : "_blank"}
+                                    rel="noopener noreferrer"
+                                    className={`${item.color} border-2 p-3 text-center hover:brightness-95 cursor-pointer transition-all border-[#2d2d2d] shadow-[2px_2px_0_0_#2d2d2d] block`}
+                                >
                                     <div className="text-2xl mb-1">{item.icon}</div>
                                     <div className="text-[10px] font-bold text-[#606060]">{item.label}</div>
                                     <div className="text-xs font-bold text-[#2d2d2d] truncate">{item.value}</div>
-                                </div>
+                                </a>
                             ))}
                         </div>
                     </div>
@@ -153,11 +159,7 @@ export default function ContactPage() {
                     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
                         <div className="pixel-border bg-white p-1 max-w-sm w-full animate-slide-in shadow-2xl">
                             <div className="border-2 border-[#e0e0e0] p-6 text-center">
-                                <div className="text-4xl mb-4 animate-bounce">✨</div>
-                                <h3 className="text-xl font-bold text-[#2d2d2d] mb-2">MESSAGE SENT!</h3>
-                                <p className="text-xs text-[#606060] mb-6 leading-relaxed">
-                                    Your message has been successfully transferred to the PC Storage System.
-                                </p>
+                                <h3 className="text-xl font-bold text-[#2d2d2d] mb-6">Message sent</h3>
                                 <button
                                     onClick={() => setShowSuccess(false)}
                                     className="pixel-button bg-[#4a90e2] text-white px-6 py-2 text-xs font-bold uppercase hover:bg-[#3880d0] w-full"

@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
-const tabs = ["About", "Skills", "Experience", "Education"];
+const tabs = ["Resume", "Skills", "Experience", "Education"];
 
 const skills = [
     { name: "React/Next.js", level: 95, color: "bg-[#4a90e2]" },
@@ -37,28 +38,21 @@ const experience = [
 
 const education = [
     {
-        degree: "Master of CS",
-        school: "Tech University",
-        year: "2018",
-        grade: "3.9 GPA",
+        degree: "Bachelor of Engineering in Software Engineering",
+        school: "McMaster University",
+        year: "",
+        grade: "",
     },
     {
-        degree: "Bachelor of CS",
-        school: "State College",
-        year: "2016",
-        grade: "3.8 GPA",
+        degree: "Bachelor of Arts in Economics",
+        school: "McMaster University",
+        year: "",
+        grade: "",
     },
 ];
 
 export default function ResumePage() {
     const [activeTab, setActiveTab] = useState(0);
-    const [hpAnimation, setHpAnimation] = useState(false);
-
-    const handleTabChange = (index: number) => {
-        setActiveTab(index);
-        setHpAnimation(true);
-        setTimeout(() => setHpAnimation(false), 500);
-    };
 
     return (
         <div className="min-h-screen p-4 bg-[#f8f0d0]">
@@ -89,9 +83,14 @@ export default function ResumePage() {
                     <div className="lg:col-span-1">
                         <div className="pixel-border p-4">
                             {/* Avatar */}
-                            <div className="pixel-inset p-8 mb-4 flex items-center justify-center bg-[#e0f8cf]">
-                                <div className="text-7xl drop-shadow-md transform hover:scale-110 transition-transform cursor-pointer">
-                                    😊
+                            <div className="pixel-inset p-4 mb-4 flex items-center justify-center bg-[#e0f8cf] border-4 border-[#2d2d2d]">
+                                <div className="w-40 h-40 relative border-2 border-[#2d2d2d] shadow-md overflow-hidden">
+                                    <Image
+                                        src="/profile.png"
+                                        alt="Profile"
+                                        fill
+                                        className="object-cover"
+                                    />
                                 </div>
                             </div>
 
@@ -103,40 +102,21 @@ export default function ResumePage() {
                                 </div>
                             </div>
 
-                            {/* HP Bar */}
-                            <div className="mb-6 bg-[#f0f0f0] p-3 rounded border-2 border-[#2d2d2d]">
-                                <div className="flex justify-between text-[10px] font-bold text-[#606060] mb-1">
-                                    <span>HP</span>
-                                    <span>999/999</span>
-                                </div>
-                                <div className="h-4 bg-[#2d2d2d] p-0.5">
-                                    <div
-                                        className={`h-full bg-gradient-to-r from-[#70c0a0] to-[#50a080] transition-all duration-500 ${hpAnimation ? "animate-shake" : ""
-                                            }`}
-                                        style={{ width: "100%" }}
-                                    >
-                                        <div className="w-full h-1/2 bg-white/30" />
+                            {/* About Section (Moved from Tab) */}
+                            <div className="mb-6 bg-[#f0f0f0] p-4 rounded border-2 border-[#2d2d2d]">
+                                <h3 className="text-xs font-bold text-[#2d2d2d] border-b-2 border-[#d0d0d0] pb-1 mb-2 uppercase">About Me</h3>
+                                <div className="text-[10px] leading-relaxed text-[#404040] font-medium space-y-2">
+                                    <p>
+                                        A passionate developer with a love for creating pixel-perfect experiences.
+                                        Started my journey in 2016 and haven't looked back since!
+                                    </p>
+                                    <div className="bg-[#e0f8cf] border border-[#9bbc0f] p-2">
+                                        <p className="text-[10px] mb-1 text-[#2d2d2d] font-bold">💡 FUN FACT:</p>
+                                        <p className="text-[10px]">
+                                            I've completed over 50+ projects and helped train 10+ junior developers.
+                                            My secret? Lots of coffee and pixel art breaks!
+                                        </p>
                                     </div>
-                                </div>
-                            </div>
-
-                            {/* Stats */}
-                            <div className="space-y-2 text-xs font-bold text-[#404040]">
-                                <div className="flex justify-between bg-[#e0f8cf] p-2 border-2 border-[#9bbc0f]">
-                                    <span>ATTACK</span>
-                                    <span className="text-[#285068]">★★★★★</span>
-                                </div>
-                                <div className="flex justify-between bg-[#e0f8cf] p-2 border-2 border-[#9bbc0f]">
-                                    <span>DEFENSE</span>
-                                    <span className="text-[#285068]">★★★★☆</span>
-                                </div>
-                                <div className="flex justify-between bg-[#e0f8cf] p-2 border-2 border-[#9bbc0f]">
-                                    <span>SPEED</span>
-                                    <span className="text-[#285068]">★★★★★</span>
-                                </div>
-                                <div className="flex justify-between bg-[#e0f8cf] p-2 border-2 border-[#9bbc0f]">
-                                    <span>SPECIAL</span>
-                                    <span className="text-[#285068]">★★★★★</span>
                                 </div>
                             </div>
 
@@ -165,7 +145,7 @@ export default function ResumePage() {
                             {tabs.map((tab, index) => (
                                 <button
                                     key={tab}
-                                    onClick={() => handleTabChange(index)}
+                                    onClick={() => setActiveTab(index)}
                                     className={`flex-1 py-3 text-xs font-bold uppercase tracking-wide border-2 border-b-0 border-[#2d2d2d] transition-all ${activeTab === index
                                             ? "bg-white text-[#2d2d2d] translate-y-1 z-10"
                                             : "bg-[#e0e0e0] text-[#808080] hover:bg-[#d0d0d0]"
@@ -179,34 +159,23 @@ export default function ResumePage() {
                         {/* Tab Content */}
                         <div className="pixel-border p-8 min-h-[500px] relative z-0">
 
-                            {/* About Tab */}
+                            {/* Resume Tab (Replaces About) */}
                             {activeTab === 0 && (
-                                <div className="animate-slide-in space-y-6">
-                                    <h3 className="text-xl font-bold text-[#2d2d2d] border-b-4 border-[#e0e0e0] pb-2">ABOUT ME</h3>
-                                    <div className="text-sm leading-relaxed text-[#404040] space-y-4 font-medium">
-                                        <p>
-                                            A passionate developer with a love for creating pixel-perfect experiences.
-                                            Started my journey in 2016 and haven't looked back since!
-                                        </p>
-                                        <div className="bg-[#e0f8cf] border-2 border-[#9bbc0f] p-4">
-                                            <p className="text-xs mb-2 text-[#2d2d2d] font-bold">💡 FUN FACT:</p>
-                                            <p className="text-xs">
-                                                I've completed over 50+ projects and helped train 10+ junior developers.
-                                                My secret? Lots of coffee and pixel art breaks!
-                                            </p>
-                                        </div>
+                                <div className="animate-slide-in space-y-6 h-full flex flex-col items-center justify-center text-center">
+                                    <h3 className="text-xl font-bold text-[#2d2d2d] border-b-4 border-[#e0e0e0] pb-2 w-full text-left mb-8">OFFICIAL RESUME</h3>
+
+                                    <div className="bg-[#e0f8cf] border-4 border-[#9bbc0f] p-12 mb-6 transform rotate-1 hover:rotate-0 transition-transform duration-300 shadow-xl">
+                                        <div className="text-6xl mb-4">📄</div>
+                                        <p className="text-sm font-bold text-[#2d2d2d] uppercase tracking-wider">Resume.pdf</p>
                                     </div>
 
-                                    <div className="grid grid-cols-2 gap-4 mt-8">
-                                        <div className="bg-[#ffd93d] border-2 border-[#2d2d2d] p-4 text-center shadow-[4px_4px_0_0_#2d2d2d]">
-                                            <div className="text-3xl font-bold text-[#2d2d2d] mb-1">50+</div>
-                                            <div className="text-[10px] font-bold text-[#605010] uppercase">Projects</div>
-                                        </div>
-                                        <div className="bg-[#ffd93d] border-2 border-[#2d2d2d] p-4 text-center shadow-[4px_4px_0_0_#2d2d2d]">
-                                            <div className="text-3xl font-bold text-[#2d2d2d] mb-1">6+</div>
-                                            <div className="text-[10px] font-bold text-[#605010] uppercase">Years Exp</div>
-                                        </div>
-                                    </div>
+                                    <p className="text-xs text-[#606060] font-bold mb-6 max-w-md">
+                                        Download the full technical resume to see detailed stats, move sets, and battle history.
+                                    </p>
+
+                                    <button className="pixel-button bg-[#4a90e2] text-white px-8 py-4 text-sm font-bold uppercase hover:bg-[#3880d0] animate-bounce-subtle">
+                                        Download PDF
+                                    </button>
                                 </div>
                             )}
 
@@ -272,14 +241,7 @@ export default function ResumePage() {
                                                 <div className="flex-1">
                                                     <h4 className="text-sm font-bold text-[#2d2d2d] mb-1">{edu.degree}</h4>
                                                     <p className="text-xs text-[#606060] mb-2">{edu.school}</p>
-                                                    <div className="flex gap-2">
-                                                        <span className="bg-[#ffd93d] px-2 py-1 text-[10px] font-bold border border-[#2d2d2d]">
-                                                            {edu.year}
-                                                        </span>
-                                                        <span className="bg-[#9bbc0f] text-white px-2 py-1 text-[10px] font-bold border border-[#2d2d2d]">
-                                                            {edu.grade}
-                                                        </span>
-                                                    </div>
+                                                    {/* Removed dates and grades as requested, but keeping structure if needed later */}
                                                 </div>
                                             </div>
                                         ))}
