@@ -93,15 +93,18 @@ export default function Home() {
                 </div>
 
                 {/* Bio Dialog Box */}
-                <div className="pixel-border bg-white p-4 text-xs font-medium text-[#2d2d2d] leading-relaxed relative flex-1 flex flex-col justify-center">
+                <div className="pixel-border bg-white p-6 text-xs font-medium text-[#2d2d2d] leading-loose relative flex-1 flex flex-col justify-center gap-4">
                   <div className="absolute -top-2 left-4 bg-white px-1 text-[10px] text-[#4a90e2] font-bold">
                     BIO
                   </div>
-                  <p className="mb-3">
+                  <p>
                     Hey there! I’m a software engineer interested in ML research, LLMs, alignment, and game design.
                   </p>
                   <p>
-                    I like turning messy problems into real systems, backend, full stack, and code‑focused ML. I love meeting new people, so if you’re building something you care about, reach out.
+                    I like turning messy problems into real systems, backend, full stack, and code‑focused ML.
+                  </p>
+                  <p>
+                    I love meeting new people, so if you’re building something you care about, <a href="https://www.linkedin.com/in/nilay-goyal/" target="_blank" rel="noopener noreferrer" className="underline decoration-2 underline-offset-2 hover:text-[#4a90e2] font-bold">reach out</a>.
                   </p>
                 </div>
               </div>

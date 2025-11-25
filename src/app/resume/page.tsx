@@ -17,22 +17,40 @@ const skills = [
 
 const experience = [
     {
-        title: "Senior Developer",
-        company: "Tech Corp",
-        period: "2022 - Present",
-        description: "Leading frontend development team",
+        title: "Payments & Backend Intern",
+        company: "Mimic",
+        period: "Sept 2025 – Present",
+        description: "High-Performance Crypto Payments",
     },
     {
-        title: "Full Stack Dev",
-        company: "StartupXYZ",
-        period: "2020 - 2022",
-        description: "Built scalable web applications",
+        title: "Software Engineer Intern",
+        company: "Ajna",
+        period: "May 2025 – Aug 2025",
+        description: "Marketplace Backend & LLMs",
     },
     {
-        title: "Junior Developer",
-        company: "Code Academy",
-        period: "2018 - 2020",
-        description: "Learned and grew as developer",
+        title: "Full Stack Intern",
+        company: "Retrofit",
+        period: "May 2025 – Aug 2025",
+        description: "Cross-Platform & Microservices",
+    },
+    {
+        title: "Software Engineer Intern",
+        company: "ICD",
+        period: "Jan 2025 – Apr 2025",
+        description: "ETL Pipelines & Observability",
+    },
+    {
+        title: "ML Engineer",
+        company: "iGEM",
+        period: "Sept 2024 – Dec 2024",
+        description: "Bio-ML & Transformers",
+    },
+    {
+        title: "Full Stack Intern",
+        company: "ProjectHumanCity",
+        period: "May 2024 – Aug 2024",
+        description: "Full Stack & CI/CD",
     },
 ];
 
@@ -147,8 +165,8 @@ export default function ResumePage() {
                                     key={tab}
                                     onClick={() => setActiveTab(index)}
                                     className={`flex-1 py-3 text-xs font-bold uppercase tracking-wide border-2 border-b-0 border-[#2d2d2d] transition-all ${activeTab === index
-                                            ? "bg-white text-[#2d2d2d] translate-y-1 z-10"
-                                            : "bg-[#e0e0e0] text-[#808080] hover:bg-[#d0d0d0]"
+                                        ? "bg-white text-[#2d2d2d] translate-y-1 z-10"
+                                        : "bg-[#e0e0e0] text-[#808080] hover:bg-[#d0d0d0]"
                                         }`}
                                 >
                                     {tab}

@@ -13,6 +13,11 @@ export const metadata: Metadata = {
   description: "A retro-styled portfolio with Pokémon GBA aesthetic",
 };
 
+import { WizardProvider } from "../context/WizardContext";
+import WizardHandCursor from "../components/WizardHandCursor";
+
+// ... imports
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -21,7 +26,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${pressStart2P.variable} antialiased font-pixel`}>
-        {children}
+        <WizardProvider>
+          <WizardHandCursor />
+          {children}
+        </WizardProvider>
       </body>
     </html>
   );

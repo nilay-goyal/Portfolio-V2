@@ -2,17 +2,27 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const projects = [
     {
         id: 1,
         name: "R.E.A.C.T.",
         type: "Electric",
-        description: "Research & Engineering Advanced Computation Tool",
-        tech: ["React", "Python", "TensorFlow"],
-        image: "⚡",
+        description: "Smartphone-based analysis of colorimetric paper sensors.",
+        details: [
+            "Built a cross-platform React Native/Expo app with an image-processing pipeline (focus checks, Canny edge detection, ROI segmentation, RGB extraction) for paper-sensor analysis.",
+            "Implemented reference-patch calibration to correct lighting/device variability and compute biomarker levels for NGAL, creatinine, and CXCL9.",
+            "Designed an accessible UI with streamlined test/history flows, backed by local storage + Firebase sync for persistent results."
+        ],
+        tech: ["React Native", "Expo", "Firebase", "OpenCV"],
+        image: "/react_project.png",
         color: "bg-[#ffd93d]",
-        stats: { hp: 80, atk: 95, def: 70 }
+        stats: { hp: 80, atk: 95, def: 70 },
+        links: {
+            wiki: "https://2025.igem.wiki/mcmaster-canada/project-description",
+            github: "https://github.com/nilay-goyal/REACT"
+        }
     },
     {
         id: 2,
@@ -96,7 +106,7 @@ const projects = [
     },
 ];
 
-const filterOptions = ["All", "Electric", "Psychic", "Normal", "Fairy", "Grass", "Water", "Steel", "Dragon", "Flying"];
+const filterOptions = ["All", "Electric", "Psychic", "Normal", "Fairy", "Grass", "Water", "Steel", "Dragon"];
 
 export default function ProjectsPage() {
     const [filter, setFilter] = useState("All");
@@ -128,20 +138,19 @@ export default function ProjectsPage() {
                     </div>
                 </div>
 
-                {/* Filter Tabs */}
+                {/* Filter Tabs (Visual Only) */}
                 <div className="pixel-border bg-white p-4 mb-6">
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 justify-center">
                         {filterOptions.map((option) => (
-                            <button
+                            <div
                                 key={option}
-                                onClick={() => setFilter(option)}
-                                className={`pixel-button px-4 py-2 text-xs md:text-sm transition-colors font-bold ${filter === option
+                                className={`pixel-button px-4 py-2 text-xs md:text-sm font-bold cursor-default ${option === "All"
                                     ? "bg-[#4a90e2] text-white"
-                                    : "bg-[#c9de6d] hover:bg-[#9bbc0f] text-[#2d2d2d]"
+                                    : "bg-[#c9de6d] text-[#2d2d2d] opacity-80"
                                     }`}
                             >
                                 {option}
-                            </button>
+                            </div>
                         ))}
                     </div>
                 </div>
@@ -169,8 +178,17 @@ export default function ProjectsPage() {
                             </div>
 
                             {/* Project Image */}
-                            <div className="pixel-inset bg-[#f0f8ff] mb-3 p-8 flex items-center justify-center border-2 border-[#d0d0d0]">
-                                <div className="text-6xl filter drop-shadow-md transform hover:scale-110 transition-transform">{project.image}</div>
+                            <div className="pixel-inset bg-[#f0f8ff] mb-3 p-8 flex items-center justify-center border-2 border-[#d0d0d0] h-48 relative overflow-hidden">
+                                {project.image.startsWith("/") ? (
+                                    <Image
+                                        src={project.image}
+                                        alt={project.name}
+                                        fill
+                                        className="object-contain p-4"
+                                    />
+                                ) : (
+                                    <div className="text-6xl filter drop-shadow-md transform hover:scale-110 transition-transform">{project.image}</div>
+                                )}
                             </div>
 
                             {/* Tech Stack Preview */}
@@ -194,7 +212,7 @@ export default function ProjectsPage() {
             {/* Modal */}
             {selectedProject && (
                 <div className="fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-50 backdrop-blur-sm animate-fade-in" onClick={() => setSelectedProject(null)}>
-                    <div className="pixel-border bg-[#f8f0d0] w-full max-w-2xl relative shadow-2xl" onClick={e => e.stopPropagation()}>
+                    <div className="pixel-border bg-[#f8f0d0] w-full max-w-5xl relative shadow-2xl" onClick={e => e.stopPropagation()}>
                         {/* Modal Header */}
                         <div className="bg-[#e85d75] p-4 border-b-4 border-[#2d2d2d] flex justify-between items-center">
                             <h2 className="text-xl md:text-2xl font-bold text-white tracking-wider">{selectedProject.name}</h2>
@@ -209,8 +227,17 @@ export default function ProjectsPage() {
                         <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                             {/* Left: Image & Stats */}
                             <div>
-                                <div className="pixel-inset bg-white p-8 flex items-center justify-center mb-4 border-4 border-[#2d2d2d]">
-                                    <div className="text-8xl animate-bounce-selector">{selectedProject.image}</div>
+                                <div className="pixel-inset bg-white p-8 flex items-center justify-center mb-4 border-4 border-[#2d2d2d] h-64 relative">
+                                    {selectedProject.image.startsWith("/") ? (
+                                        <Image
+                                            src={selectedProject.image}
+                                            alt={selectedProject.name}
+                                            fill
+                                            className="object-contain p-2"
+                                        />
+                                    ) : (
+                                        <div className="text-8xl animate-bounce-selector">{selectedProject.image}</div>
+                                    )}
                                 </div>
                                 <div className="space-y-2 text-xs font-bold">
                                     <div className="flex items-center gap-2">
@@ -235,12 +262,21 @@ export default function ProjectsPage() {
                             </div>
 
                             {/* Right: Info */}
-                            <div className="space-y-4">
-                                <div className="bg-white border-2 border-[#2d2d2d] p-4">
-                                    <p className="text-xs font-bold text-[#e85d75] mb-1">TYPE / {selectedProject.type}</p>
-                                    <p className="text-sm font-medium text-[#2d2d2d] leading-relaxed">
+                            <div className="space-y-4 flex flex-col h-full">
+                                <div className="bg-white border-2 border-[#2d2d2d] p-4 max-h-[300px] overflow-y-auto custom-scrollbar">
+                                    <p className="text-xs font-bold text-[#e85d75] mb-2">TYPE / {selectedProject.type}</p>
+                                    <p className="text-sm font-medium text-[#2d2d2d] leading-relaxed mb-4">
                                         {selectedProject.description}
                                     </p>
+
+                                    {/* Detailed Bullet Points */}
+                                    {(selectedProject as any).details && (
+                                        <ul className="list-disc pl-4 space-y-2 text-xs text-[#404040]">
+                                            {(selectedProject as any).details.map((detail: string, i: number) => (
+                                                <li key={i}>{detail}</li>
+                                            ))}
+                                        </ul>
+                                    )}
                                 </div>
 
                                 <div>
@@ -254,10 +290,31 @@ export default function ProjectsPage() {
                                     </div>
                                 </div>
 
-                                <div className="pt-4 mt-auto">
-                                    <button className="w-full pixel-button bg-[#4a90e2] text-white py-3 text-sm font-bold uppercase hover:bg-[#3880d0]">
-                                        View Source Code
-                                    </button>
+                                <div className="pt-4 mt-auto grid grid-cols-2 gap-4">
+                                    {(selectedProject as any).links?.wiki && (
+                                        <a
+                                            href={(selectedProject as any).links.wiki}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="pixel-button bg-[#9bbc0f] text-[#2d2d2d] py-3 text-sm font-bold uppercase hover:bg-[#8bac0f] text-center"
+                                        >
+                                            View Wiki
+                                        </a>
+                                    )}
+                                    {(selectedProject as any).links?.github ? (
+                                        <a
+                                            href={(selectedProject as any).links.github}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="pixel-button bg-[#4a90e2] text-white py-3 text-sm font-bold uppercase hover:bg-[#3880d0] text-center"
+                                        >
+                                            GitHub
+                                        </a>
+                                    ) : (
+                                        <button className="pixel-button bg-[#e0e0e0] text-[#808080] py-3 text-sm font-bold uppercase cursor-not-allowed">
+                                            No Source
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         </div>
