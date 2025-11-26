@@ -6,13 +6,25 @@ import Image from "next/image";
 
 const tabs = ["Resume", "Skills", "Experience", "Education"];
 
-const skills = [
-    { name: "React/Next.js", level: 95, color: "bg-[#4a90e2]" },
-    { name: "TypeScript", level: 90, color: "bg-[#4a90e2]" },
-    { name: "Node.js", level: 85, color: "bg-[#9bbc0f]" },
-    { name: "UI/UX Design", level: 80, color: "bg-[#9d7bb8]" },
-    { name: "Database", level: 75, color: "bg-[#e85d75]" },
-    { name: "DevOps", level: 70, color: "bg-[#ffd93d]" },
+const skillCategories = [
+    {
+        title: "Languages",
+        skills: ["Go", "Rust", "Python", "C++", "Java", "JavaScript", "TypeScript", "C#", "SQL", "Shell"],
+        color: "bg-[#f08030]", // Fire/Fighting color
+        icon: "🗣️"
+    },
+    {
+        title: "Frameworks/Libraries",
+        skills: ["React", "Node.js", "Express.js", "Django", "gRPC", "Kafka", "Pandas", "NumPy", "ASP.NET", "PyTorch"],
+        color: "bg-[#6890f0]", // Water/Flying color
+        icon: "📚"
+    },
+    {
+        title: "Developer Tools",
+        skills: ["Git", "Linux", "Docker", "Kubernetes", "Jenkins", "AWS", "Azure", "PostgreSQL", "MongoDB", "Redis", "ElasticSearch"],
+        color: "bg-[#78c850]", // Grass/Bug color
+        icon: "🛠️"
+    }
 ];
 
 const experience = [
@@ -91,7 +103,7 @@ export default function ResumePage() {
                         </div>
 
                         <div className="hidden md:block text-white/20 text-6xl font-bold tracking-tighter">
-                            IDNo. 2025
+                            Nilay Goyal
                         </div>
                     </div>
                 </div>
@@ -125,14 +137,12 @@ export default function ResumePage() {
                                 <h3 className="text-xs font-bold text-[#2d2d2d] border-b-2 border-[#d0d0d0] pb-1 mb-2 uppercase">About Me</h3>
                                 <div className="text-[10px] leading-relaxed text-[#404040] font-medium space-y-2">
                                     <p>
-                                        A passionate developer with a love for creating pixel-perfect experiences.
-                                        Started my journey in 2016 and haven't looked back since!
+                                        Software Engineering student building useful real-world systems. Recently working on payments, marketplaces, and the frontier of ML & biology.
                                     </p>
                                     <div className="bg-[#e0f8cf] border border-[#9bbc0f] p-2">
                                         <p className="text-[10px] mb-1 text-[#2d2d2d] font-bold">💡 FUN FACT:</p>
                                         <p className="text-[10px]">
-                                            I've completed over 50+ projects and helped train 10+ junior developers.
-                                            My secret? Lots of coffee and pixel art breaks!
+                                            I've secured victory in over 10 hackathons. Most recently, I traveled to Paris to compete globally at iGEM 2025.
                                         </p>
                                     </div>
                                 </div>
@@ -142,13 +152,26 @@ export default function ResumePage() {
                             <div className="mt-6 pt-4 border-t-2 border-dashed border-[#2d2d2d]">
                                 <p className="text-[10px] font-bold text-[#808080] mb-3 text-center uppercase tracking-wider">Badges Earned</p>
                                 <div className="grid grid-cols-4 gap-2">
-                                    {["🏆", "⭐", "💎", "🎯", "🔥", "⚡", "💻", "🎨"].map((badge, i) => (
+                                    {[
+                                        { name: "Go", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" },
+                                        { name: "Rust", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-original.svg" },
+                                        { name: "Python", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+                                        { name: "JavaScript", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+                                        { name: "Node.js", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+                                        { name: "AWS", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
+                                        { name: "Django", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" },
+                                        { name: "React", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+                                    ].map((badge) => (
                                         <div
-                                            key={i}
-                                            className="bg-[#ffd93d] border-2 border-[#2d2d2d] aspect-square flex items-center justify-center text-xl hover:scale-110 transition-transform cursor-help shadow-[2px_2px_0_0_#2d2d2d]"
-                                            title="Badge Earned!"
+                                            key={badge.name}
+                                            className="bg-white border-2 border-[#2d2d2d] aspect-square flex items-center justify-center p-2 hover:scale-110 transition-transform cursor-help shadow-[2px_2px_0_0_#2d2d2d]"
+                                            title={`${badge.name} Badge Earned!`}
                                         >
-                                            {badge}
+                                            <img
+                                                src={badge.url}
+                                                alt={badge.name}
+                                                className="w-full h-full object-contain"
+                                            />
                                         </div>
                                     ))}
                                 </div>
@@ -179,45 +202,47 @@ export default function ResumePage() {
 
                             {/* Resume Tab (Replaces About) */}
                             {activeTab === 0 && (
-                                <div className="animate-slide-in space-y-6 h-full flex flex-col items-center justify-center text-center">
-                                    <h3 className="text-xl font-bold text-[#2d2d2d] border-b-4 border-[#e0e0e0] pb-2 w-full text-left mb-8">OFFICIAL RESUME</h3>
+                                <div className="animate-slide-in h-full flex flex-col">
+                                    <h3 className="text-xl font-bold text-[#2d2d2d] border-b-4 border-[#e0e0e0] pb-2 w-full text-left mb-4">OFFICIAL RESUME</h3>
 
-                                    <div className="bg-[#e0f8cf] border-4 border-[#9bbc0f] p-12 mb-6 transform rotate-1 hover:rotate-0 transition-transform duration-300 shadow-xl">
-                                        <div className="text-6xl mb-4">📄</div>
-                                        <p className="text-sm font-bold text-[#2d2d2d] uppercase tracking-wider">Resume.pdf</p>
+                                    <div className="flex-1 w-full aspect-[8.5/11] border-4 border-[#2d2d2d] bg-[#525252] shadow-inner">
+                                        <iframe
+                                            src="/resume.pdf#view=FitH"
+                                            className="w-full h-full"
+                                            title="Resume"
+                                        />
                                     </div>
 
-                                    <p className="text-xs text-[#606060] font-bold mb-6 max-w-md">
-                                        Download the full technical resume to see detailed stats, move sets, and battle history.
-                                    </p>
-
-                                    <button className="pixel-button bg-[#4a90e2] text-white px-8 py-4 text-sm font-bold uppercase hover:bg-[#3880d0] animate-bounce-subtle">
-                                        Download PDF
-                                    </button>
+                                    <div className="mt-4 flex justify-end">
+                                        <a href="/resume.pdf" download="Nilay_Goyal_Resume.pdf" className="pixel-button bg-[#4a90e2] text-white px-6 py-3 text-xs font-bold uppercase hover:bg-[#3880d0] flex items-center gap-2">
+                                            <span>💾</span> Download PDF
+                                        </a>
+                                    </div>
                                 </div>
                             )}
 
                             {/* Skills Tab */}
                             {activeTab === 1 && (
-                                <div className="animate-slide-in space-y-6">
+                                <div className="animate-slide-in space-y-8">
                                     <h3 className="text-xl font-bold text-[#2d2d2d] border-b-4 border-[#e0e0e0] pb-2">SKILL STATS</h3>
-                                    <div className="space-y-4">
-                                        {skills.map((skill, index) => (
-                                            <div key={skill.name}>
-                                                <div className="flex justify-between text-xs font-bold text-[#404040] mb-1">
-                                                    <span>{skill.name}</span>
-                                                    <span>{skill.level}/100</span>
+
+                                    <div className="grid gap-6">
+                                        {skillCategories.map((category, index) => (
+                                            <div key={category.title} className="bg-[#f8f8f8] border-2 border-[#2d2d2d] p-4 shadow-[4px_4px_0_0_#e0e0e0]">
+                                                <div className="flex items-center gap-2 mb-4 border-b-2 border-dashed border-[#d0d0d0] pb-2">
+                                                    <span className="text-2xl">{category.icon}</span>
+                                                    <h4 className="text-sm font-bold text-[#2d2d2d] uppercase tracking-wider">{category.title}</h4>
                                                 </div>
-                                                <div className="h-5 bg-[#f0f0f0] border-2 border-[#2d2d2d] overflow-hidden">
-                                                    <div
-                                                        className={`h-full ${skill.color} transition-all duration-1000 ease-out flex items-center justify-end pr-2 relative`}
-                                                        style={{
-                                                            width: `${skill.level}%`,
-                                                            animationDelay: `${index * 0.1}s`
-                                                        }}
-                                                    >
-                                                        <div className="absolute top-0 left-0 right-0 h-1/2 bg-white/20" />
-                                                    </div>
+
+                                                <div className="flex flex-wrap gap-2">
+                                                    {category.skills.map((skill) => (
+                                                        <div
+                                                            key={skill}
+                                                            className={`${category.color} text-white text-xs font-bold px-3 py-1.5 border-2 border-[#2d2d2d] shadow-[2px_2px_0_0_#2d2d2d] hover:-translate-y-1 hover:shadow-[3px_3px_0_0_#2d2d2d] transition-all cursor-default`}
+                                                        >
+                                                            {skill}
+                                                        </div>
+                                                    ))}
                                                 </div>
                                             </div>
                                         ))}

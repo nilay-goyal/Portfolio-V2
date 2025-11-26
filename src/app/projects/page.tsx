@@ -4,6 +4,49 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
+
+const techColors: Record<string, string> = {
+    "React Native": "bg-[#61dafb] text-[#2d2d2d]",
+    "Expo": "bg-[#4630eb] text-white",
+    "Firebase": "bg-[#ffca28] text-[#2d2d2d]",
+    "OpenCV": "bg-[#5c3bc4] text-white",
+    "D3.js": "bg-[#f9a03f] text-[#2d2d2d]",
+    "WebGL": "bg-[#990000] text-white",
+    "Next.js": "bg-[#000000] text-white",
+    "OpenAI API": "bg-[#10a37f] text-white",
+    "Node.js": "bg-[#68a063] text-white",
+    "TypeScript": "bg-[#3178c6] text-white",
+    "Vue.js": "bg-[#4fc08d] text-white",
+    "PostgreSQL": "bg-[#336791] text-white",
+    "Python": "bg-[#3776ab] text-white",
+    "Go": "bg-[#00add8] text-white",
+    "Rust": "bg-[#dea584] text-[#2d2d2d]",
+    "Kafka": "bg-[#231f20] text-white",
+    "Elasticsearch": "bg-[#005571] text-white",
+    "Three.js": "bg-[#000000] text-white",
+    "Storybook": "bg-[#ff4785] text-white",
+    "IoT": "bg-[#4a90e2] text-white",
+    "Leaflet": "bg-[#199900] text-white",
+    "gRPC": "bg-[#244c5a] text-white",
+    "WASM": "bg-[#654ff0] text-white",
+    "CSS Modules": "bg-[#264de4] text-white",
+    "PyTorch": "bg-[#ee4c2c] text-white",
+    "SciPy": "bg-[#8caae6] text-white",
+    "NumPy": "bg-[#013243] text-white",
+    "Pandas": "bg-[#150458] text-white",
+    "AlphaFold2": "bg-[#0f9d58] text-white",
+    "OpenMM": "bg-[#ff6b6b] text-white",
+    "PyMOL": "bg-[#4285f4] text-white",
+    "MediaPipe": "bg-[#4285f4] text-white",
+    "Computer Vision": "bg-[#ff6b35] text-white",
+    "Google AI SDK": "bg-[#4285f4] text-white",
+    "tldraw": "bg-[#1d1d1d] text-white",
+    "Vite": "bg-[#646cff] text-white",
+    "WebSocket": "bg-[#010101] text-white",
+    "Mapbox": "bg-[#000000] text-white",
+    "shadcn/ui": "bg-[#000000] text-white"
+};
+
 const projects = [
     {
         id: 1,
@@ -11,9 +54,10 @@ const projects = [
         type: "Electric",
         description: "Smartphone-based analysis of colorimetric paper sensors.",
         details: [
-            "Built a cross-platform React Native/Expo app with an image-processing pipeline (focus checks, Canny edge detection, ROI segmentation, RGB extraction) for paper-sensor analysis.",
-            "Implemented reference-patch calibration to correct lighting/device variability and compute biomarker levels for NGAL, creatinine, and CXCL9.",
-            "Designed an accessible UI with streamlined test/history flows, backed by local storage + Firebase sync for persistent results."
+            "🥇 Won Gold at Paris iGEM 2025.",
+            "Built a cross-platform React Native/Expo app with an advanced image-processing pipeline for paper-sensor analysis.",
+            "Implemented reference-patch calibration to correct lighting variability and accurately compute biomarker levels.",
+            "Designed an accessible UI with streamlined flows, backed by local storage and Firebase sync."
         ],
         tech: ["React Native", "Expo", "Firebase", "OpenCV"],
         image: "/react_project.png",
@@ -26,43 +70,51 @@ const projects = [
     },
     {
         id: 2,
-        name: "PRISM",
-        type: "Psychic",
-        description: "Advanced data visualization and analytics suite",
-        tech: ["D3.js", "WebGL", "Next.js"],
-        image: "🔮",
-        color: "bg-[#9d7bb8]",
-        stats: { hp: 75, atk: 90, def: 85 }
-    },
-    {
-        id: 3,
         name: "Babble Bear",
         type: "Normal",
         description: "Language learning assistant with AI chat",
         tech: ["OpenAI API", "React Native", "Node.js"],
-        image: "🐻",
+        image: "/babblebear_project.png",
         color: "bg-[#c9de6d]",
         stats: { hp: 90, atk: 60, def: 80 }
     },
     {
-        id: 4,
-        name: "Sugar",
-        type: "Fairy",
-        description: "Modern UI component library for web apps",
-        tech: ["TypeScript", "CSS Modules", "Storybook"],
-        image: "✨",
-        color: "bg-[#e85d75]",
-        stats: { hp: 65, atk: 85, def: 60 }
-    },
-    {
-        id: 5,
+        id: 3,
         name: "Karma Farm",
         type: "Grass",
         description: "Community-driven sustainable farming platform",
         tech: ["Vue.js", "Firebase", "IoT"],
-        image: "🌱",
+        image: "/karmafarm_project.png",
         color: "bg-[#9bbc0f]",
         stats: { hp: 85, atk: 70, def: 75 }
+    },
+    {
+        id: 4,
+        name: "NeuroInk",
+        type: "Dark",
+        description: "Computer vision-powered collaborative drawing with hand tracking.",
+        details: [
+            "Built in 8 hours: Real-time hand tracking with MediaPipe for touchless drawing via webcam gestures.",
+            "AI chat interface for natural language drawing commands with multi-user WebSocket collaboration."
+        ],
+        tech: ["React", "MediaPipe", "Computer Vision", "WebSocket", "Google AI SDK"],
+        image: "/neuroink_project.png",
+        color: "bg-[#4a5568]",
+        stats: { hp: 70, atk: 85, def: 75 },
+        links: {
+            github: "https://github.com/nilay-goyal/neuro-ink-team",
+            demo: "https://neuro-ink-team.vercel.app/"
+        }
+    },
+    {
+        id: 5,
+        name: "PRISM",
+        type: "Psychic",
+        description: "Advanced data visualization and analytics suite",
+        tech: ["D3.js", "WebGL", "Next.js"],
+        image: "/prism_project.png",
+        color: "bg-[#9d7bb8]",
+        stats: { hp: 75, atk: 90, def: 85 }
     },
     {
         id: 6,
@@ -70,39 +122,74 @@ const projects = [
         type: "Water",
         description: "Real estate analytics and listing service",
         tech: ["PostgreSQL", "Next.js", "Leaflet"],
-        image: "🏠",
+        image: "/getreals_project.png",
         color: "bg-[#4a90e2]",
         stats: { hp: 70, atk: 80, def: 70 }
     },
     {
         id: 7,
-        name: "Ctrl+F",
-        type: "Steel",
-        description: "Intelligent document search engine",
-        tech: ["Elasticsearch", "Python", "React"],
-        image: "🔍",
-        color: "bg-[#b8b8d0]",
-        stats: { hp: 60, atk: 90, def: 65 }
+        name: "Sugar",
+        type: "Fairy",
+        description: "Modern UI component library for web apps",
+        tech: ["TypeScript", "CSS Modules", "Storybook"],
+        image: "/sugar_project.png",
+        color: "bg-[#e85d75]",
+        stats: { hp: 65, atk: 85, def: 60 }
     },
     {
         id: 8,
         name: "Omni3D",
         type: "Dragon",
-        description: "Web-based 3D modeling and rendering engine",
-        tech: ["Three.js", "WebGL", "WASM"],
-        image: "🧊",
+        description: "Two-sided marketplace connecting 3D printing buyers with local printer owners.",
+        details: [
+            "Built a Facebook Marketplace-style platform with STL file upload, Mapbox seller discovery, and in-app messaging.",
+            "Full-stack TypeScript with Supabase backend (auth, database, storage) and shadcn/ui for responsive design."
+        ],
+        tech: ["React", "TypeScript", "Supabase", "Tailwind CSS", "Mapbox", "shadcn/ui"],
+        image: "/omni3d_project.jpg",
         color: "bg-[#7038f8]",
-        stats: { hp: 80, atk: 95, def: 80 }
+        stats: { hp: 85, atk: 95, def: 80 },
+        links: {
+            github: "https://github.com/nilay-goyal/omni-3d",
+            demo: "https://www.youtube.com/watch?v=ktiYfnzDUz4"
+        }
     },
     {
         id: 9,
         name: "HERMES",
         type: "Flying",
-        description: "High-speed distributed messaging system",
-        tech: ["Go", "Kafka", "gRPC"],
-        image: "🕊️",
+        description: "ML-driven protein engineering for cancer treatment delivery.",
+        details: [
+            "🥈 Won Silver at Paris iGEM 2024.",
+            "Built Transformer in PyTorch with SciPy for protein-ligand binding, boosting accuracy 25% on 100K+ samples.",
+            "Engineered docking with DeepSite/AlphaFold2, cutting structural search by 90%+ for large-scale screening.",
+            "Accelerated 1K+ molecular simulations linking NumPy/Pandas/OpenMM with wet-lab assays in PyMOL."
+        ],
+        tech: ["PyTorch", "SciPy", "NumPy", "Pandas", "AlphaFold2", "OpenMM", "PyMOL"],
+        image: "/hermes_project.png",
         color: "bg-[#a890f0]",
-        stats: { hp: 75, atk: 100, def: 60 }
+        stats: { hp: 85, atk: 100, def: 75 },
+        links: {
+            wiki: "https://2024.igem.wiki/mcmaster-canada/"
+        }
+    },
+    {
+        id: 10,
+        name: "Ctrl+F",
+        type: "Steel",
+        description: "Tinder for hackathon teammates - AI-powered team matching platform.",
+        details: [
+            "Swipe-based UI with custom AI matching algorithm analyzing skill compatibility, project interests, and team dynamics.",
+            "Serves participants, organizers, and sponsors with real-time matching and comprehensive hacker profiles."
+        ],
+        tech: ["React", "TypeScript", "Supabase", "Tailwind CSS", "Radix UI"],
+        image: "/ctrlf_project.png",
+        color: "bg-[#b8b8d0]",
+        stats: { hp: 75, atk: 90, def: 70 },
+        links: {
+            demo: "https://devpost.com/software/ctrl-f-3mr8ht",
+            github: "https://github.com/nilay-goyal/swipe-wide-love"
+        }
     },
 ];
 
@@ -194,7 +281,7 @@ export default function ProjectsPage() {
                             {/* Tech Stack Preview */}
                             <div className="flex flex-wrap gap-1">
                                 {project.tech.map((tech) => (
-                                    <span key={tech} className="text-[10px] bg-[#f0f0f0] px-1 border border-[#d0d0d0] text-[#606060]">
+                                    <span key={tech} className={`text-[10px] px-1 border border-[#d0d0d0] ${techColors[tech] || "bg-[#f0f0f0] text-[#606060]"}`}>
                                         {tech}
                                     </span>
                                 ))}
@@ -283,38 +370,60 @@ export default function ProjectsPage() {
                                     <h3 className="text-xs font-bold text-[#2d2d2d] mb-2 uppercase">Tech Stack</h3>
                                     <div className="flex flex-wrap gap-2">
                                         {selectedProject.tech.map(tech => (
-                                            <span key={tech} className="bg-[#ffd93d] border-2 border-[#2d2d2d] px-3 py-1 text-xs font-bold shadow-[2px_2px_0_0_#2d2d2d]">
+                                            <span key={tech} className={`${techColors[tech] || "bg-[#ffd93d] text-[#2d2d2d]"} border-2 border-[#2d2d2d] px-4 py-2 text-sm font-bold shadow-[2px_2px_0_0_#2d2d2d] hover:-translate-y-1 transition-transform`}>
                                                 {tech}
                                             </span>
                                         ))}
                                     </div>
                                 </div>
 
-                                <div className="pt-4 mt-auto grid grid-cols-2 gap-4">
-                                    {(selectedProject as any).links?.wiki && (
-                                        <a
-                                            href={(selectedProject as any).links.wiki}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="pixel-button bg-[#9bbc0f] text-[#2d2d2d] py-3 text-sm font-bold uppercase hover:bg-[#8bac0f] text-center"
-                                        >
-                                            View Wiki
-                                        </a>
-                                    )}
-                                    {(selectedProject as any).links?.github ? (
-                                        <a
-                                            href={(selectedProject as any).links.github}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="pixel-button bg-[#4a90e2] text-white py-3 text-sm font-bold uppercase hover:bg-[#3880d0] text-center"
-                                        >
-                                            GitHub
-                                        </a>
-                                    ) : (
-                                        <button className="pixel-button bg-[#e0e0e0] text-[#808080] py-3 text-sm font-bold uppercase cursor-not-allowed">
-                                            No Source
-                                        </button>
-                                    )}
+                                <div className="pt-4 mt-auto">
+                                    {/* Determine button layout based on available links */}
+                                    {(() => {
+                                        const hasWiki = !!(selectedProject as any).links?.wiki;
+                                        const hasGithub = !!(selectedProject as any).links?.github;
+                                        const hasDemo = !!(selectedProject as any).links?.demo;
+                                        const linkCount = [hasWiki, hasGithub, hasDemo].filter(Boolean).length;
+
+                                        return (
+                                            <div className={`grid gap-4 ${linkCount === 3 ? 'grid-cols-3' : linkCount === 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                                                {hasWiki && (
+                                                    <a
+                                                        href={(selectedProject as any).links.wiki}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="pixel-button bg-[#9bbc0f] text-[#2d2d2d] py-3 text-sm font-bold uppercase hover:bg-[#8bac0f] text-center"
+                                                    >
+                                                        View Wiki
+                                                    </a>
+                                                )}
+                                                {hasDemo && (
+                                                    <a
+                                                        href={(selectedProject as any).links.demo}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="pixel-button bg-[#ffd93d] text-[#2d2d2d] py-3 text-sm font-bold uppercase hover:bg-[#f0c920] text-center"
+                                                    >
+                                                        Learn More
+                                                    </a>
+                                                )}
+                                                {hasGithub ? (
+                                                    <a
+                                                        href={(selectedProject as any).links.github}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="pixel-button bg-[#4a90e2] text-white py-3 text-sm font-bold uppercase hover:bg-[#3880d0] text-center"
+                                                    >
+                                                        GitHub
+                                                    </a>
+                                                ) : !hasWiki && !hasDemo && (
+                                                    <button className="pixel-button bg-[#e0e0e0] text-[#808080] py-3 text-sm font-bold uppercase cursor-not-allowed">
+                                                        No Source
+                                                    </button>
+                                                )}
+                                            </div>
+                                        );
+                                    })()}
                                 </div>
                             </div>
                         </div>
